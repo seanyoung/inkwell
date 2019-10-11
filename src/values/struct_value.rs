@@ -29,7 +29,7 @@ impl<'ctx> StructValue<'ctx> {
         self.struct_value.set_name(name);
     }
 
-    pub fn get_type(&self) -> StructType {
+    pub fn get_type(&self) -> StructType<'ctx> {
         StructType::new(self.struct_value.get_type())
     }
 
@@ -49,7 +49,7 @@ impl<'ctx> StructValue<'ctx> {
         self.struct_value.print_to_stderr()
     }
 
-    pub fn as_instruction(&self) -> Option<InstructionValue> {
+    pub fn as_instruction(&self) -> Option<InstructionValue<'ctx>> {
         self.struct_value.as_instruction()
     }
 
@@ -57,15 +57,15 @@ impl<'ctx> StructValue<'ctx> {
         self.struct_value.has_metadata()
     }
 
-    pub fn get_metadata(&self, kind_id: u32) -> Option<MetadataValue> {
+    pub fn get_metadata(&self, kind_id: u32) -> Option<MetadataValue<'ctx>> {
         self.struct_value.get_metadata(kind_id)
     }
 
-    pub fn set_metadata(&self, metadata: MetadataValue, kind_id: u32) {
+    pub fn set_metadata(&self, metadata: MetadataValue<'ctx>, kind_id: u32) {
         self.struct_value.set_metadata(metadata, kind_id)
     }
 
-    pub fn replace_all_uses_with(&self, other: StructValue) {
+    pub fn replace_all_uses_with(&self, other: StructValue<'ctx>) {
         self.struct_value.replace_all_uses_with(other.as_value_ref())
     }
 }
