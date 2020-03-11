@@ -4,6 +4,7 @@ use llvm_sys::prelude::LLVMTypeRef;
 
 use crate::types::{IntType, VoidType, FunctionType, PointerType, VectorType, ArrayType, StructType, FloatType};
 use crate::types::traits::AsTypeRef;
+use crate::values::IntValue;
 
 macro_rules! enum_type_set {
     ($(#[$enum_attrs:meta])* $enum_name:ident: { $($(#[$variant_attrs:meta])* $args:ident,)+ }) => (
@@ -358,6 +359,28 @@ impl<'ctx> BasicTypeEnum<'ctx> {
             true
         } else {
             false
+        }
+    }
+
+    pub fn size_of(&self) -> Option<IntValue<'ctx>> {
+        match self {
+            BasicTypeEnum::ArrayType(t) => t.size_of(),
+            BasicTypeEnum::FloatType(t) => Some(t.size_of()),
+            BasicTypeEnum::IntType(t) => Some(t.size_of()),
+            BasicTypeEnum::PointerType(t) => Some(t.size_of()),
+            BasicTypeEnum::StructType(t) => t.size_of(),
+            BasicTypeEnum::VectorType(t) => t.size_of(),
+        }
+    }
+
+    pub fn get_alignment(&self) -> IntValue<'ctx> {
+        match self {
+            BasicTypeEnum::ArrayType(t) => t.get_alignment(),
+            BasicTypeEnum::FloatType(t) => t.get_alignment(),
+            BasicTypeEnum::IntType(t) => t.get_alignment(),
+            BasicTypeEnum::PointerType(t) => t.get_alignment(),
+            BasicTypeEnum::StructType(t) => t.get_alignment(),
+            BasicTypeEnum::VectorType(t) => t.get_alignment(),
         }
     }
 }
