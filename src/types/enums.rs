@@ -372,15 +372,4 @@ impl<'ctx> BasicTypeEnum<'ctx> {
             BasicTypeEnum::VectorType(t) => t.size_of(),
         }
     }
-
-    pub fn get_alignment(&self) -> IntValue<'ctx> {
-        match self {
-            BasicTypeEnum::ArrayType(t) => t.get_alignment(),
-            BasicTypeEnum::FloatType(t) => t.get_alignment(),
-            BasicTypeEnum::IntType(t) => t.get_alignment(),
-            BasicTypeEnum::PointerType(t) => t.get_alignment(),
-            BasicTypeEnum::StructType(t) => t.get_alignment(),
-            BasicTypeEnum::VectorType(t) => t.get_alignment(),
-        }
-    }
 }
