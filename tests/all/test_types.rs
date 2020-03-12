@@ -373,8 +373,6 @@ fn test_basic_type_enum() {
                    basic_type.array_type(0));
         assert_eq!(basic_type.as_basic_type_enum().size_of(),
                    basic_type.size_of());
-        assert_eq!(basic_type.as_basic_type_enum().get_alignment(),
-                   basic_type.get_alignment());
     }
 }
 
