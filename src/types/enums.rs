@@ -380,15 +380,4 @@ impl<'ctx> BasicTypeEnum<'ctx> {
             false
         }
     }
-
-    pub fn size_of(&self) -> Option<IntValue<'ctx>> {
-        match self {
-            BasicTypeEnum::ArrayType(t) => t.size_of(),
-            BasicTypeEnum::FloatType(t) => Some(t.size_of()),
-            BasicTypeEnum::IntType(t) => Some(t.size_of()),
-            BasicTypeEnum::PointerType(t) => Some(t.size_of()),
-            BasicTypeEnum::StructType(t) => t.size_of(),
-            BasicTypeEnum::VectorType(t) => t.size_of(),
-        }
-    }
 }
